@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 
-function CanvasComponent(){
+function CanvasComponent({ setCanvas }){
 
   const currentColor = useSelector((state) => state.Reducer.Color.Color);
   const currentThickness = useSelector((state) => state.Reducer.Thickness.Thickness);
   const currentTrasparency = useSelector((state) => state.Reducer.Transparency.Transparency);
   
   const [Background, setBackground] = useState(false);
+  
 
   useEffect(() => {
 
@@ -16,6 +17,7 @@ function CanvasComponent(){
     let y = 0;
     const canvas = document.querySelector('canvas');
     const context = canvas.getContext('2d');
+    setCanvas(canvas);
 
     //set background to white using closure so it only happens once
     let Backgroundfunction = (function() {
@@ -69,18 +71,6 @@ function CanvasComponent(){
       context.stroke();
       context.closePath();
     }
-    const download = document.getElementById('download');
-
-    download.addEventListener('click', function(e) {
-      const link = document.createElement('a');
-      link.download = 'MyImage.png';
-      link.href = canvas.toDataURL();
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      console.log('im downloading')
-      
-    });
 
 });
 

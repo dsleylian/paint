@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }from 'react';
 import ColorPicker from './components/ColorPicker';
 import Header from './components/Header';
 import ThicknessComponent from './components/Thickness';
@@ -8,6 +8,9 @@ import EraserComponent from './components/Eraser';
 import './App.css';
 
 function App() {
+
+  const [canvas, setCanvas] = useState('');
+
   return (
     <div className="App">
         <Header />
@@ -15,11 +18,11 @@ function App() {
             <div className="control-container">
                 <ThicknessComponent />
                 <TransparencyComponent />
-                <EraserComponent />
+                <EraserComponent canvas={canvas}/>
                 <ColorPicker />
                 <a className="footer-button" href="https://darleyinfo.vercel.app/">Back to Home</a>
             </div>
-            <CanvasComponent />
+            <CanvasComponent setCanvas={setCanvas} />
         </div>
     </div>
   );
